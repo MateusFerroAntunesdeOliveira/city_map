@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include "mapa.cpp"
 #include "mapa.h"
 
@@ -6,7 +8,26 @@ using namespace std;
 
 int main() {
     Mapa mapa;
+    string cidadeA, cidadeB;
 
+    //-> Adiciona as Cidades desejadas no Mapa
+    AdicionaCidadeMapa(mapa);
+    //-> Une as Cidades desejadas no Mapa (realizando adjacencias)
+    UneCidadesMapa(mapa);
+
+    cout << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+    cout << "Por gentileza, digite as cidades A e B para encontrarmos o melhor caminho possivel!" << endl;
+    cout << "\nCidade A: ";
+    getline (cin, cidadeA);
+    cout << "Cidade B: ";
+    getline (cin, cidadeB);
+
+    cout << "\n| Cidade A: " << cidadeA << " - Cidade B: " << cidadeB << " |" << endl << endl;
+
+    return 0;
+}
+
+void AdicionaCidadeMapa(Mapa &mapa) {
     mapa.addCidade("Londrina");
     mapa.addCidade("Itarare");
     mapa.addCidade("Sao Paulo");
@@ -20,7 +41,9 @@ int main() {
     mapa.addCidade("Itajai");
     mapa.addCidade("Florianopolis");
     mapa.addCidade("Lages");
+}
 
+void UneCidadesMapa(Mapa &mapa) {
     mapa.une("Londrina", "Itarare", 310);
     mapa.une("Londrina", "Ponta Grossa", 271);
     mapa.une("Itarare", "Sao Paulo", 342);
@@ -43,6 +66,4 @@ int main() {
     mapa.une("Itajai", "Florianopolis", 102);
     mapa.une("Itajai", "Blumenau", 52.3);
     mapa.une("Itajai", "Joinville", 86.2);
-
-    return 0;
 }
