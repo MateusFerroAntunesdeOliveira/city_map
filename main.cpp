@@ -27,10 +27,10 @@ int main() {
     mapa.une("Itarare", "Curitiba", 208);
     mapa.une("Itarare", "Ponta Grossa", 174);
     mapa.une("Curitiba", "Ponta Grossa", 114);
-    mapa.une("Curitiba", "Registro", 221.2);
-    mapa.une("Sao Paulo", "Registro", 185.9);
     mapa.une("Curitiba", "Mafra", 115);
     mapa.une("Curitiba", "Joinville", 132);
+    mapa.une("Registro", "Curitiba", 221.2);
+    mapa.une("Registro", "Sao Paulo", 185.9);
     mapa.une("Mafra", "Joinville", 136);
     mapa.une("Mafra", "Blumenau", 165);
     mapa.une("Mafra", "Ponta Grossa", 155);
