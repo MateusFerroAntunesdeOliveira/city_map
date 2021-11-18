@@ -15,11 +15,13 @@ enum EstadoProfundidade {nao_visitado_p, sendo_visitado_p, visitado_p};
 
 class Mapa {
 public:
+	Mapa();
 	Mapa(int num_nos);
 	void une(string a, string b, double distancia);
 	void remove(string a, string b);
 	bool adjacente(string a, string b) const;
     void addCidade(string nomeCidade);
+	int menorCaminho(string a, string b, int precede[]);
 
 	void largura(int v0);		// percorre em largura a partir de v0
 	void profundidade(int v0);	// percorre em prof. a partir de v0

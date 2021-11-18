@@ -1,5 +1,9 @@
 #include "mapa.h"
 
+Mapa::Mapa() {
+	// Sobrecarga
+}
+
 Mapa::Mapa(int num_nos) {
     //-> Cria nova lista onde cada uma é um pair. Cada pair é formado pela cidade B e pela distância
     cidades = new list<pair<int, int>>[N];
