@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Mapa.cpp"
-#include "Mapa.h"
+#include "mapa.cpp"
+#include "mapa.h"
 
 using namespace std;
 
