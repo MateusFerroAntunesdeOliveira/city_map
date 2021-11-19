@@ -6,27 +6,6 @@
 
 using namespace std;
 
-int main() {
-    Mapa mapa;
-    string cidadeA, cidadeB;
-
-    //-> Adiciona as Cidades desejadas no Mapa
-    AdicionaCidadeMapa(mapa);
-    //-> Une as Cidades desejadas no Mapa (realizando adjacencias)
-    UneCidadesMapa(mapa);
-
-    cout << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-    cout << "Por gentileza, digite as cidades A e B para encontrarmos o melhor caminho possivel!" << endl;
-    cout << "\nCidade A: ";
-    getline (cin, cidadeA);
-    cout << "Cidade B: ";
-    getline (cin, cidadeB);
-
-    cout << "\n| Cidade A: " << cidadeA << " - Cidade B: " << cidadeB << " |" << endl << endl;
-
-    return 0;
-}
-
 void AdicionaCidadeMapa(Mapa &mapa) {
     mapa.addCidade("Londrina");
     mapa.addCidade("Itarare");
@@ -66,4 +45,25 @@ void UneCidadesMapa(Mapa &mapa) {
     mapa.une("Itajai", "Florianopolis", 102);
     mapa.une("Itajai", "Blumenau", 52.3);
     mapa.une("Itajai", "Joinville", 86.2);
+}
+
+int main() {
+    Mapa mapa;
+    string cidadeA, cidadeB;
+
+    //-> Adiciona as Cidades desejadas no Mapa
+    AdicionaCidadeMapa(mapa);
+    //-> Une as Cidades desejadas no Mapa (realizando adjacencias)
+    UneCidadesMapa(mapa);
+
+    cout << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+    cout << "Por gentileza, digite as cidades A e B para encontrarmos o melhor caminho possivel!" << endl;
+    cout << "\nCidade A: ";
+    getline (cin, cidadeA);
+    cout << "Cidade B: ";
+    getline (cin, cidadeB);
+
+    cout << "\n| Cidade A: " << cidadeA << " - Cidade B: " << cidadeB << " |" << endl << endl;
+
+    return 0;
 }

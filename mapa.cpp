@@ -4,35 +4,48 @@ Mapa::Mapa() {
 	// Sobrecarga
 }
 
-Mapa::Mapa(int num_nos) {
-    //-> Cria nova lista onde cada uma é um pair. Cada pair é formado pela cidade B e pela distância
-    cidades = new list<pair<int, int>>[N];
-    //-> Guarda numero de nós em N
-    N = num_nos;
+Mapa::Mapa(int N) {
+    //-> Guarda numero de nós em N, atribuindo numero de vertices
+	this->N = N;
 
-	for (int i=0; i<N; ++i) {
-		for (int j=0; j<N; ++j) adj[i][j] = false;
+	for (int i=0; i < MAXNOS; ++i) {
+		for (int j=0; j < MAXNOS; ++j) adj[i][j] = false;
 	}
 }
 
-void Mapa::une(string a, string b, double distancia) {
-    // cidades[a].push_back(make_pair(b, distancia));
-	// if (validos(a,b)) adj[a][b] = true;
+int Mapa::getCidade(string cidade) const{
+	int k = -1;
+
+	for (int i = 0; i < MAXNOS; ++i) {
+		if (cidades_matrix[i] == cidade) k = i;
+	}
+	
+	return k;
+}
+
+void Mapa::une(string a, string b, double distancia)  {
+	if (validos(a,b)) {
+		cidades_matrix[getCidade(a)].push_back(getCidade(b));
+		cidades_matrix[getCidade(b)].push_back(getCidade(a));
+		//TODO Fazer para cidades_distancias tambem
+	}
 }
 
 void Mapa::remove(string a, string b) {
-	// if (validos(a,b)) adj[a][b] = false;
+	//TODO Fazer Remove
 }
 
 bool Mapa::adjacente(string a, string b) const {
-	// if (validos(a,b)) return adj[a][b];
-	// else return false;
+	if (validos(a,b)) return adj[getCidade(a)][getCidade(b)];
+	else return false;
 }
 
-void addCidade(string nomeCidade) {
-    // cidades[++N] = nomeCidade;
+void Mapa::addCidade(string nomeCidade) {
+    cidades_matrix[N++] = nomeCidade;
 }
 
 bool Mapa::validos(string a, string b) const {
-    // return (a>=0 && a<N && b>=0 && b<N);
+    bool condicaoA = getCidade(a) > -1 && getCidade(a) < MAXNOS;
+    bool condicaoB = getCidade(b) > -1 && getCidade(b) < MAXNOS;
+	return (condicaoA && condicaoB);
 }
