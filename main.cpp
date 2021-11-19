@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//-> Adiciona Determinada Cidade no Mapa, usando o próprio 'endereço' para mapa
 void AdicionaCidadeMapa(Mapa &mapa) {
     mapa.addCidade("Londrina");
     mapa.addCidade("Itarare");
@@ -22,6 +23,7 @@ void AdicionaCidadeMapa(Mapa &mapa) {
     mapa.addCidade("Lages");
 }
 
+//-> Une duas cidades no Mapa, usando o próprio 'endereço' para mapa
 void UneCidadesMapa(Mapa &mapa) {
     mapa.une("Londrina", "Itarare", 310);
     mapa.une("Londrina", "Ponta Grossa", 271);
@@ -51,9 +53,7 @@ int main() {
     Mapa mapa;
     string cidadeA, cidadeB;
 
-    //-> Adiciona as Cidades desejadas no Mapa
     AdicionaCidadeMapa(mapa);
-    //-> Une as Cidades desejadas no Mapa (realizando adjacencias)
     UneCidadesMapa(mapa);
 
     cout << "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;

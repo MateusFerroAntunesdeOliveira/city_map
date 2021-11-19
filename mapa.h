@@ -12,19 +12,24 @@ constexpr int MAXNOS = 200; //-> Max de cidades
 class Mapa {
 
 private:
-	int N;	                            		//-> número de vértices (pontos de ref) do grafo
-	bool adj[MAXNOS][MAXNOS];           		//-> Adjacencia entre cidades
-	string cidades_matrix[MAXNOS];		 		//-> Armaza as cidades (listas de adjacencias)
-	bool validos(string a, string b) const;
-	int getCidade(string cidade) const;
+	//-> Variaveis
+	int N;	                           	//-> número de vértices (pontos de ref) do grafo
+	bool adj[MAXNOS][MAXNOS];          	//-> Adjacencia entre cidades
+	string cidades_matrix[MAXNOS];		//-> Armaza as cidades (listas de adjacencias)
 
+	//-> Métodos
+	int getCidade(string cidade) const;
+	// TODO Adicionar método para pegar Distancia
 public:
+	//-> Métodos
 	Mapa();
 	Mapa(int N);
 	void une(string a, string b, double distancia);
 	void remove(string a, string b);
-	bool adjacente(string a, string b) const;
 	void addCidade(string nomeCidade);
+	bool adjacente(string a, string b) const;
+	bool validos(string a, string b) const;
+	// TODO Adicionar método do MenorCaminho
 };
 
 #endif
