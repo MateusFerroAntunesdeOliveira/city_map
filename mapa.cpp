@@ -44,3 +44,43 @@ bool Mapa::validos(string a, string b) const {
     bool condicaoB = getCidade(b) > -1 && getCidade(b) < MAXNOS;
 	return (condicaoA && condicaoB);
 }
+
+double Mapa::dijkstra(string a, string b, vector<string> &rota) {
+	int dist[MAXNOS];
+	bool visitados[MAXNOS];
+
+	for (int i = 0; i < MAXNOS; ++i) {
+		dist[i] = INFINITO;
+		visitados[i] = false;
+	}
+
+	//-> Distância: A para A é 0. E a respectiva cidade é visitada
+	dist[getCidade(a)] = 0;
+	visitados[getCidade(a)] = true;
+    int corrente = getCidade(a);
+
+	while (corrente != getCidade(b)) {
+        int menordist = INFINITO;          		// menor das novas distâncias calculadas
+        int k;                              	// próximo corrente (aquele com menor distância)
+        int distCalculada = dist[corrente];   	// distância calculada de a até o nó corrente
+        for (int i = 0; i < N; i++) {
+            if (!visitados[i]) {
+                int novadist = distCalculada;
+				//TODO Arrumar 'peso' da linha abaixo
+                // int novadist = distCalculada + peso(corrente,i);
+                if (novadist < dist[i]) {
+                    dist[i] = novadist;
+					//TODO Verificar erro abaixo
+                    // precede[i] = corrente;
+                }
+                if (dist[i] < menordist) {
+                    menordist = dist[i];
+                    k = i;
+                }
+            } // se já calculado não faz nada
+        } // fim do for
+        corrente = k;
+        visitados[corrente] = true;
+	}
+    return dist[getCidade(b)];
+}

@@ -2,6 +2,7 @@
 #define MAPA_H
 
 #include <iostream>
+#include <vector>
 
 #define INFINITO 10000000
 
@@ -29,7 +30,7 @@ public:
 	void addCidade(string nomeCidade);
 	bool adjacente(string a, string b) const;
 	bool validos(string a, string b) const;
-	// TODO Adicionar método do MenorCaminho
+	double dijkstra(string a, string b, vector<string> &rota);
 };
 
 #endif
