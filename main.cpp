@@ -64,12 +64,18 @@ int main() {
     cout << "Cidade B: ";
     getline (cin, cidadeB);
 
-    cout << "\n| Origem: " << cidadeA << " com Destino: " << cidadeB << " |" << endl;
+    cout << endl;
+    cout << "|=-=-=-=-=-=-=-=-=-=-=-=-=-=|" << endl;
+    cout << "|      ESCOLHAS FEITAS      |" << endl;
+    cout << "|=-=-=-=-=-=-=-=-=-=-=-=-=-=|" << endl;
+    cout << "| Origem: " << cidadeA << endl;
+    cout << "| Destino: " << cidadeB << endl;
+    cout << "|=-=-=-=-=-=-=-=-=-=-=-=-=-=|" << endl;
 
     double menorDistCalc = mapa.dijkstra(cidadeA, cidadeB, rota);
     cout << "\nA menor distancia entre " << cidadeA << " e " << cidadeB << " da: " << menorDistCalc << " Km" << endl;
 
-    cout << "\nSendo que a melhor rota eh: | " << cidadeA << " -> ";
+    cout << "\nSendo que a melhor rota atualmente eh: | " << cidadeA << " -> ";
     string menorRotaCalc = mapa.retornaRota(cidadeA, cidadeB, rota);
     cout << endl << endl;
 
