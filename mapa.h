@@ -16,21 +16,18 @@ private:
 	//-> Variaveis
 	int N;	                           	//-> número de vértices (pontos de ref) do grafo
 	bool adj[MAXNOS][MAXNOS];          	//-> Adjacencia entre cidades
-	double dist[MAXNOS][MAXNOS];
+	double dist[MAXNOS][MAXNOS];		//-> Distancia entre cidades
 	string cidades_matrix[MAXNOS];		//-> Armaza as cidades (listas de adjacencias)
-
-	//-> Métodos
-	int getCidade(string cidade) const;
-	// TODO Adicionar método para pegar Distancia
 public:
 	//-> Métodos
 	Mapa();
 	Mapa(int N);
+	int getCidade(string cidade) const;
 	void une(string a, string b, double distancia);
-	void remove(string a, string b);
 	void addCidade(string nomeCidade);
 	bool adjacente(string a, string b) const;
 	bool validos(string a, string b) const;
+	string retornaRota(string a, string b, vector<string> &rota);
 	double distancia(string a, string b);
 	double dijkstra(string a, string b, vector<string> &rota);
 };

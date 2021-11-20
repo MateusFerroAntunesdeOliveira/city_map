@@ -23,13 +23,6 @@ void Mapa::une(string a, string b, double distancia)  {
 	}
 }
 
-void Mapa::remove(string a, string b) {
-	if (validos(a,b)) {
-		adj[getCidade(a)][getCidade(b)] = adj[getCidade(b)][getCidade(a)] = false;
-		dist[getCidade(a)][getCidade(b)] = dist[getCidade(b)][getCidade(a)] = -1;
-	}
-}
-
 void Mapa::addCidade(string nomeCidade) {
     cidades_matrix[N++] = nomeCidade;
 }
@@ -45,6 +38,14 @@ bool Mapa::validos(string a, string b) const {
 	return (condicaoA && condicaoB);
 }
 
+string Mapa::retornaRota(string a, string b, vector<string> &rota) {
+	for (int i = rota.size() - 1; i > -1; --i) {
+        cout << rota[i] << " ";
+        if(i != 0) cout << "-> ";
+		else cout << "|";
+	}
+}
+
 double Mapa::distancia(string a, string b) {
 	if (adj[getCidade(a)][getCidade(b)]) return dist[getCidade(a)][getCidade(b)];
 	else return INFINITO;
@@ -58,12 +59,15 @@ double Mapa::dijkstra(string a, string b, vector<string> &rota) {
 		dist[i] = INFINITO;
 		visitados[i] = false;
 	}
-
+	
 	//-> Distância: A para A é 0. E a respectiva cidade é visitada
 	dist[getCidade(a)] = 0;
 	visitados[getCidade(a)] = true;
     int corrente = getCidade(a);
 	int precede[N];
+	
+	//-> Por enquanto, o local atual é a própria cidade origem
+	string localAtual = cidades_matrix[getCidade(a)];
 
 	while (corrente != getCidade(b)) {
         double menordist = INFINITO;          		// menor das novas distâncias calculadas
@@ -86,7 +90,14 @@ double Mapa::dijkstra(string a, string b, vector<string> &rota) {
         visitados[corrente] = true;
 	}
 
-	//TODO Fazer o menor caminho, pegando o destino final e precendo até chegar na origem
+	localAtual = cidades_matrix[getCidade(b)];
+	int cidadeAtual = getCidade(b);
+	
+	do {
+		rota.push_back(localAtual);							//-> Coloca na 'rota' a localização atual
+		localAtual = cidades_matrix[precede[cidadeAtual]];  //-> Localização atual retrocederá 1 posição (para o que precede esta cidade)
+		cidadeAtual = getCidade(localAtual);				//-> Atualiza o indice da cidade retornando em 1 o indice
+	} while (localAtual != a);
 
     return dist[getCidade(b)];
 }
