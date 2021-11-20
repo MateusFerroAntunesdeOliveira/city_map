@@ -52,6 +52,7 @@ void UneCidadesMapa(Mapa &mapa) {
 int main() {
     Mapa mapa;
     string cidadeA, cidadeB;
+    vector<string> rota;
 
     AdicionaCidadeMapa(mapa);
     UneCidadesMapa(mapa);
@@ -63,7 +64,10 @@ int main() {
     cout << "Cidade B: ";
     getline (cin, cidadeB);
 
-    cout << "\n| Cidade A: " << cidadeA << " - Cidade B: " << cidadeB << " |" << endl << endl;
+    cout << "\n| Cidade A: " << cidadeA << " - Cidade B: " << cidadeB << " |" << endl;
+
+    double menorDistCalc = mapa.dijkstra(cidadeA, cidadeB, rota);
+    cout << "\nA menor distancia entre " << cidadeA << " e " << cidadeB << " eh: " << menorDistCalc << endl << endl;
 
     return 0;
 }

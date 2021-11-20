@@ -12,26 +12,26 @@ Mapa::Mapa(int N) {
 
 int Mapa::getCidade(string cidade) const{
 	int k = -1;
-
 	for (int i = 0; i < MAXNOS; ++i) if (cidades_matrix[i] == cidade) k = i;
 	return k;
 }
 
 void Mapa::une(string a, string b, double distancia)  {
 	if (validos(a,b)) {
-		//TODO VERIFICAR SE É NA MATRIZ DE ADJACENCIA OU NA MATRIZ QUE ARMAZENA AS CIDADES
-		cidades_matrix[getCidade(a)].push_back(getCidade(b));
-		cidades_matrix[getCidade(b)].push_back(getCidade(a));
-		//TODO Fazer para cidades_distancias tambem
+		adj[getCidade(a)][getCidade(b)] = adj[getCidade(b)][getCidade(a)] = true;
+		dist[getCidade(a)][getCidade(b)] = dist[getCidade(b)][getCidade(a)] = distancia;
 	}
 }
 
 void Mapa::remove(string a, string b) {
-	//TODO Fazer Remove
+	if (validos(a,b)) {
+		adj[getCidade(a)][getCidade(b)] = adj[getCidade(b)][getCidade(a)] = false;
+		dist[getCidade(a)][getCidade(b)] = dist[getCidade(b)][getCidade(a)] = -1;
+	}
 }
 
 void Mapa::addCidade(string nomeCidade) {
-    cidades_matrix[N+1] = nomeCidade;
+    cidades_matrix[N++] = nomeCidade;
 }
 
 bool Mapa::adjacente(string a, string b) const {
@@ -45,8 +45,13 @@ bool Mapa::validos(string a, string b) const {
 	return (condicaoA && condicaoB);
 }
 
+double Mapa::distancia(string a, string b) {
+	if (adj[getCidade(a)][getCidade(b)]) return dist[getCidade(a)][getCidade(b)];
+	else return INFINITO;
+}
+
 double Mapa::dijkstra(string a, string b, vector<string> &rota) {
-	int dist[MAXNOS];
+	double dist[MAXNOS];
 	bool visitados[MAXNOS];
 
 	for (int i = 0; i < MAXNOS; ++i) {
@@ -58,20 +63,18 @@ double Mapa::dijkstra(string a, string b, vector<string> &rota) {
 	dist[getCidade(a)] = 0;
 	visitados[getCidade(a)] = true;
     int corrente = getCidade(a);
+	int precede[N];
 
 	while (corrente != getCidade(b)) {
-        int menordist = INFINITO;          		// menor das novas distâncias calculadas
-        int k;                              	// próximo corrente (aquele com menor distância)
-        int distCalculada = dist[corrente];   	// distância calculada de a até o nó corrente
+        double menordist = INFINITO;          		// menor das novas distâncias calculadas
+        int k;                              		// próximo corrente (aquele com menor distância)
+        double distCalculada = dist[corrente];   	// distância calculada de a até o nó corrente
         for (int i = 0; i < N; i++) {
             if (!visitados[i]) {
-                int novadist = distCalculada;
-				//TODO Arrumar 'peso' da linha abaixo
-                // int novadist = distCalculada + peso(corrente,i);
+                double novadist = distCalculada + distancia(cidades_matrix[corrente], cidades_matrix[i]);
                 if (novadist < dist[i]) {
                     dist[i] = novadist;
-					//TODO Verificar erro abaixo
-                    // precede[i] = corrente;
+                    precede[i] = corrente;
                 }
                 if (dist[i] < menordist) {
                     menordist = dist[i];
@@ -82,5 +85,8 @@ double Mapa::dijkstra(string a, string b, vector<string> &rota) {
         corrente = k;
         visitados[corrente] = true;
 	}
+
+	//TODO Fazer o menor caminho, pegando o destino final e precendo até chegar na origem
+
     return dist[getCidade(b)];
 }

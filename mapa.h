@@ -16,6 +16,7 @@ private:
 	//-> Variaveis
 	int N;	                           	//-> número de vértices (pontos de ref) do grafo
 	bool adj[MAXNOS][MAXNOS];          	//-> Adjacencia entre cidades
+	double dist[MAXNOS][MAXNOS];
 	string cidades_matrix[MAXNOS];		//-> Armaza as cidades (listas de adjacencias)
 
 	//-> Métodos
@@ -30,6 +31,7 @@ public:
 	void addCidade(string nomeCidade);
 	bool adjacente(string a, string b) const;
 	bool validos(string a, string b) const;
+	double distancia(string a, string b);
 	double dijkstra(string a, string b, vector<string> &rota);
 };
 
